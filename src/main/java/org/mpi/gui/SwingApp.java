@@ -1,7 +1,10 @@
 package org.mpi.gui;
 
+import org.apache.tomcat.jni.Time;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +23,25 @@ public class SwingApp extends JFrame {
         var quitButton = new JButton("Quit");
 
         quitButton.addActionListener((ActionEvent event) -> {
+
+            RestTemplate restTemplate = new RestTemplate();
+            String fooResourceUrl
+                    = "https://data-graphics.eu/test";
+            ResponseEntity<String> response
+                    = restTemplate.getForEntity(fooResourceUrl , String.class);
+
+
+
+
+
+            try {
+                quitButton.setText(response.getBody());
+                Time.sleep(8000); }
+            catch (Exception e){}
+
+
+
+
             System.exit(0);
         });
 
