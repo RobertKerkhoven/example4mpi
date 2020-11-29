@@ -1,39 +1,46 @@
 package org.mpi.gui.controller;
 
+import org.mpi.gui.controller.content.MyContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
 
 @Controller
 public class MyFrame extends JFrame {
 
     @Autowired
-    MyGui myGui;
+    MyContent myContent;
 
+    @Autowired
+    MyMenuBar myMenuBar;
 
-    JLabel label;
+    public MyFrame(){
+        setTitle("Test GUI");
+        setLayout(new BorderLayout());
+
+    }
 
     @PostConstruct
     public void init() {
         // setup panels and tabs, including myGui.generate()
         createAndShowGUI();
-        //pack();
+        setJMenuBar(myMenuBar);
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+        pack();
     }
 
     public void createAndShowGUI() {
 
 
-        var quitButton = new JButton("Quit");
 
-        quitButton.addActionListener((ActionEvent event) -> {
-            System.exit(0);
-        });
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        try {
+        //        try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
@@ -44,24 +51,12 @@ public class MyFrame extends JFrame {
 //        } catch (UnsupportedLookAndFeelException e) {
 //            e.printStackTrace();
 //        }
-        setTitle("Test GUI");
 
-        setLayout(new BorderLayout());
-        add(myGui);
-
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-
-//        createLayout(quitButton);
-//        createLayout(myGui.generate());
-
-
-
-//        setSize(300, 200);
-//        setLocationRelativeTo(null);
-
-
+        add(new JButton("test0"), BorderLayout.NORTH);
+        add(new JButton("test1"),BorderLayout.SOUTH);
+        add(new JButton("test2"),BorderLayout.WEST);
+        add(new JButton("test3"),BorderLayout.EAST);
+        add(myContent,BorderLayout.CENTER);
 
     }
 
@@ -124,38 +119,4 @@ public class MyFrame extends JFrame {
         loginButton.setBounds(10, 80, 80, 25);
         panel.add(loginButton);
     }
-
-
-//    private void initUI() {
-//
-//        var quitButton = new JButton("Quit");
-//
-//        quitButton.addActionListener((ActionEvent event) -> {
-//            System.exit(0);
-//        });
-//
-//        createLayout(quitButton);
-//
-//        setTitle("Quit button");
-//        setSize(300, 200);
-//        setLocationRelativeTo(null);
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//    }
-//
-//    private void createLayout(JComponent... arg) {
-//
-//        var pane = getContentPane();
-//        var gl = new GroupLayout(pane);
-//        pane.setLayout(gl);
-//
-//        gl.setAutoCreateContainerGaps(true);
-//
-//        gl.setHorizontalGroup(gl.createSequentialGroup()
-//                .addComponent(arg[0])
-//        );
-//
-//        gl.setVerticalGroup(gl.createSequentialGroup()
-//                .addComponent(arg[0])
-//        );
-//    }
 }

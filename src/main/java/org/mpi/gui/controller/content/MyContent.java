@@ -1,4 +1,4 @@
-package org.mpi.gui.controller;
+package org.mpi.gui.controller.content;
 
 import org.springframework.stereotype.Component;
 
@@ -8,12 +8,13 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 @Component
-public class MyGui extends JPanel  {
+public class MyContent extends JPanel  {
     private JPanel panel = new JPanel(new GridBagLayout());
 
-    public MyGui() {
+    public MyContent() {
 
         setLayout(new GridLayout(1, 2));
+        //setPreferredSize(new Dimension(600, 600));
         add(createLeftPane());
         add(createRightPane());
 
@@ -21,9 +22,16 @@ public class MyGui extends JPanel  {
 
     protected JPanel createLeftPane() {
 
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panel.setBackground(Color.RED);
+        JPanel panel_1 = new JPanel(new BorderLayout());
+        panel_1.setMinimumSize(new Dimension(100, 600));
+        panel_1.setMaximumSize(new Dimension(100, 600));
+        panel_1.setPreferredSize(new Dimension(100, 600));
+
+
+
+
+        panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panel_1.setBackground(Color.RED);
 
         JPanel content = new JPanel(new GridBagLayout());
         content.setOpaque(false);
@@ -55,29 +63,29 @@ public class MyGui extends JPanel  {
         content.add(top, gbc);
         content.add(bottom, gbc);
 
-        panel.add(content);
-        panel.add(new JLabel("Character name"), BorderLayout.NORTH);
+        panel_1.add(content);
+        panel_1.add(new JLabel("Character name"), BorderLayout.NORTH);
 
-        return  panel;
+        return  panel_1;
 
     }
 
     protected JPanel createRightPane() {
 
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.BLUE);
+        JPanel panel_2 = new JPanel();
+        panel_2.setBackground(Color.BLUE);
 
-        return panel;
+        return panel_2;
 
     }
 
-    public JPanel generate() {
-
-
-
-        panel.add(new Button("test"));
-        return panel;
-    }
+//    public JPanel generate() {
+//
+//
+//
+//        panel.add(new Button("test"));
+//        return panel;
+//    }
 
 
 }
