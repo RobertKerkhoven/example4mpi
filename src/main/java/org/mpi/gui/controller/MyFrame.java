@@ -1,15 +1,21 @@
 package org.mpi.gui.controller;
 
 import org.mpi.gui.controller.content.MyContent;
+import org.mpi.gui.controller.content.VideoContent;
+import org.mpi.gui.controller.leftsidebar.LeftSideMenuPanel;
+import org.mpi.gui.controller.menubar.MyMenuBar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 @Controller
-public class MyFrame extends JFrame {
+public class MyFrame extends JFrame implements ActionListener {
 
     @Autowired
     MyContent myContent;
@@ -17,7 +23,16 @@ public class MyFrame extends JFrame {
     @Autowired
     MyMenuBar myMenuBar;
 
-    public MyFrame(){
+    @Autowired
+    LeftSideMenuPanel leftSideMenuPanel;
+
+    @Autowired
+    VideoContent videoContent;
+
+    public JButton testButton = new JButton("test button");
+    public JDialog dialog;
+
+    public MyFrame() {
         setTitle("Test GUI");
         setLayout(new BorderLayout());
 
@@ -27,96 +42,87 @@ public class MyFrame extends JFrame {
     public void init() {
         // setup panels and tabs, including myGui.generate()
         createAndShowGUI();
+
+        createDialog();
+
         setJMenuBar(myMenuBar);
 
         setLocationRelativeTo(null);
         setVisible(true);
         pack();
+
+    }
+
+    private void createDialog() {
+
+        dialog = new JDialog();
+        JLabel label = new JLabel("Please wait...");
+        label.setSize(new Dimension(100,100));
+        dialog.setLocationRelativeTo(null);
+        dialog.setTitle("Please Wait...");
+        dialog.add(label);
+
+        dialog.pack();
     }
 
     public void createAndShowGUI() {
 
 
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //        try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (UnsupportedLookAndFeelException e) {
-//            e.printStackTrace();
-//        }
+        add(testButton, BorderLayout.NORTH);
+        add(new JButton("test1"), BorderLayout.SOUTH);
+        add(leftSideMenuPanel, BorderLayout.WEST);
 
-        add(new JButton("test0"), BorderLayout.NORTH);
-        add(new JButton("test1"),BorderLayout.SOUTH);
-        add(new JButton("test2"),BorderLayout.WEST);
-        add(new JButton("test3"),BorderLayout.EAST);
-        add(myContent,BorderLayout.CENTER);
+
+        add(new JButton("test3"), BorderLayout.EAST);
+        add(videoContent, BorderLayout.CENTER);
+
+
+        initActionListeners();
 
     }
 
-    private void createLayout(JComponent... arg) {
+    private void initActionListeners() {
 
-        var pane = getContentPane();
-        var gl = new GroupLayout(pane);
-        pane.setLayout(gl);
+        leftSideMenuPanel.buttonOne.addActionListener(videoContent);
+        leftSideMenuPanel.buttonTwo.addActionListener(videoContent);
+        leftSideMenuPanel.buttonThree.addActionListener(videoContent);
 
-        gl.setAutoCreateContainerGaps(true);
+        leftSideMenuPanel.buttonInvisible.addActionListener(myMenuBar);
+        leftSideMenuPanel.buttonVisible.addActionListener(myMenuBar);
 
-        gl.setHorizontalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-        );
+        leftSideMenuPanel.buttonRed.addActionListener(this);
+        leftSideMenuPanel.buttonBlue.addActionListener(this);
 
-        gl.setVerticalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-        );
+        testButton.addActionListener(this);
+
+
     }
 
 
-    private static void placeComponents(JPanel panel) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        /* We don’t introduce much in the layout part
-         * Set the layout here to null
-         */
-        panel.setLayout(null);
+        System.out.println(e.getActionCommand());
 
-        // Create JLabel
-        JLabel userLabel = new JLabel("User:");
-        /* This method defines the location of the component.
-         * setBounds(x, y, width, height)
-         * x and y specify the new position of the upper left corner, and the new size is specified by width and height.
-         */
-        userLabel.setBounds(10, 20, 80, 25);
-        panel.add(userLabel);
+        if (e.getActionCommand().equals("Red")) {
+            testButton.setBackground(Color.RED);
 
-        /*
-         * Create text fields for user input
-         */
-        JTextField userText = new JTextField(20);
-        userText.setBounds(100, 20, 165, 25);
-        panel.add(userText);
+        }
 
-        // Enter the text field of the password
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(10, 50, 80, 25);
-        panel.add(passwordLabel);
+        if (e.getActionCommand().equals("Blue")) {
+            testButton.setBackground(Color.BLUE);
 
-        /*
-         *This is similar to the text field used for input
-         * However, the entered information will be replaced by dots for security including passwords
-         */
-        JPasswordField passwordText = new JPasswordField(20);
-        passwordText.setBounds(100, 50, 165, 25);
-        panel.add(passwordText);
+        }
 
-        // Create login button
-        JButton loginButton = new JButton("login");
-        loginButton.setBounds(10, 80, 80, 25);
-        panel.add(loginButton);
+        if (e.getActionCommand().equals("test button")) {
+            JDialog d = new JDialog();
+            dialog.setVisible(true);
+
+        }
+
     }
+
+
 }

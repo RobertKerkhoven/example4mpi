@@ -136,7 +136,6 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -166,5 +165,5 @@ buildNumber.properties
 /LOG_FILE_IS_UNDEFINED
 spring-batch-module/LOG_FILE_IS_UNDEFINED
 
-lib
+
 

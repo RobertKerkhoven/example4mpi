@@ -9,7 +9,8 @@ import java.awt.*;
 
 @Component
 public class MyContent extends JPanel  {
-    private JPanel panel = new JPanel(new GridBagLayout());
+    private JPanel panel_1 = new JPanel(new BorderLayout());
+    private JPanel panel_2 = new JPanel();
 
     public MyContent() {
 
@@ -22,14 +23,9 @@ public class MyContent extends JPanel  {
 
     protected JPanel createLeftPane() {
 
-        JPanel panel_1 = new JPanel(new BorderLayout());
         panel_1.setMinimumSize(new Dimension(100, 600));
         panel_1.setMaximumSize(new Dimension(100, 600));
         panel_1.setPreferredSize(new Dimension(100, 600));
-
-
-
-
         panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel_1.setBackground(Color.RED);
 
@@ -71,21 +67,7 @@ public class MyContent extends JPanel  {
     }
 
     protected JPanel createRightPane() {
-
-        JPanel panel_2 = new JPanel();
         panel_2.setBackground(Color.BLUE);
-
         return panel_2;
-
     }
-
-//    public JPanel generate() {
-//
-//
-//
-//        panel.add(new Button("test"));
-//        return panel;
-//    }
-
-
 }
