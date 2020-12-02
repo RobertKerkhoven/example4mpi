@@ -49,7 +49,7 @@ public class VideoContent extends JPanel implements ActionListener {
         JPanel webBrowserPanel = new JPanel(new BorderLayout());
         webBrowserPanel.setBorder(BorderFactory.createTitledBorder("Native Web Browser component"));
          webBrowser = new JWebBrowser();
-        this.webBrowser.navigate("https://youtu.be/hjeSOxi3uPg");
+        this.webBrowser.navigate("https://youtu.be/hjeSOxi3uPg"); //Magic
         webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
         webBrowserPanel.setPreferredSize(new Dimension(800,600));
         contentPane.add(webBrowserPanel, BorderLayout.CENTER);
@@ -81,7 +81,7 @@ public class VideoContent extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        System.out.println(e.getActionCommand());
+        //Magic
 
         if (e.getActionCommand().equals("Youtube")) {
             //goto google
