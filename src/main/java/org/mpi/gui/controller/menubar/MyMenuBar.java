@@ -13,6 +13,8 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
 
     public MyMenuBar(){
 
+
+
         //Creating the MenuBar and adding components
         JMenu m1 = new JMenu("File");
         JMenu m2 = new JMenu("Help");

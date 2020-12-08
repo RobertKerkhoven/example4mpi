@@ -4,6 +4,7 @@ import org.mpi.gui.controller.content.MyContent;
 import org.mpi.gui.controller.content.VideoContent;
 import org.mpi.gui.controller.leftsidebar.LeftSideMenuPanel;
 import org.mpi.gui.controller.menubar.MyMenuBar;
+import org.mpi.util.Multiply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -56,12 +57,17 @@ public class MyFrame extends JFrame implements ActionListener {
     private void createDialog() {
 
         dialog = new JDialog();
-        JLabel label = new JLabel("Please wait...");
+        JLabel label = new JLabel("Please wait for calculation..");
         label.setSize(new Dimension(100,100));
         dialog.setLocationRelativeTo(null);
         dialog.setTitle("Please Wait...");
         dialog.add(label);
-
+        JPanel panel = new JPanel();
+        JTextField tf = new JTextField(40);
+        Multiply m = new Multiply(3,4);
+        tf.setText(m.getString());
+        panel.add(tf);
+        dialog.add(panel);
         dialog.pack();
     }
 

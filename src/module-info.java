@@ -1,0 +1,3 @@
+module SpringBootSwing {
+    requires Calc;
+}

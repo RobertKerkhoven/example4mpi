@@ -9,9 +9,13 @@
         <module name="SpringBootSwing" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Calculations" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Calculations" options="-parameters" />
       <module name="SpringBootSwing" options="-parameters" />
     </option>
   </component>
